@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 
-namespace ApolloDBExporter
+namespace SQLServerExporter.Library.Data
 {
-        public class Database : INotifyPropertyChanged
+        public class SQLServerDB : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
             public SqlConnection SqlConn;
@@ -61,8 +61,8 @@ namespace ApolloDBExporter
                     }
                 }
             }
-            public Database() { }
-            public Database(string server, string database, string username, string password, bool trustedConnection, int timeout = 45)
+            public SQLServerDB() { }
+            public SQLServerDB(string server, string database, string username, string password, bool trustedConnection, int timeout = 45)
             {
                 Server = server;
                 this.database = database;

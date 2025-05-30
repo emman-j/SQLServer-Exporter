@@ -8,13 +8,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SQLServerExporter.Library.Data;
 
-namespace ApolloDBExporter
+namespace SQLServerExporter.Library.DataAccess
 {
-        public class Database_DataAccess
+        public class SQLServerDA
         {
-            private readonly Database database;
-            public Database_DataAccess(Database _database) 
+            private readonly SQLServerDB database;
+            public SQLServerDA(SQLServerDB _database) 
             {
                 database = _database;
             }

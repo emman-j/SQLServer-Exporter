@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ApolloDBExporter
+namespace SQLServerExporter.Library.Service
 {
     public class TextBoxWriter : TextWriter
     {
