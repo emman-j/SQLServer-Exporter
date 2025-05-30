@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -6,21 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static NPOI.HSSF.Util.HSSFColor;
+using SQLServerExporter.Library.Data;
+using SQLServerExporter.Library.DataAccess;
+using SQLServerExporter.Library.Service;
+using SQLServerExporter.Forms;
 
-namespace ApolloDBExporter
+namespace SQLServerExporter
 {
     public partial class Form_Main : Form
     {
-        private readonly Database database;
-        private readonly Database_DataAccess dbTables;
+        private readonly SQLServerDB database;
+        private readonly SQLServerDA dbTables;
         private readonly ExportService exportService;
         private readonly Dictionary<string, string> ExportTypes = new Dictionary<string, string>();
         private readonly Dictionary<string, string> Delimiters = new Dictionary<string, string>();
         public Form_Main()
         {
             InitializeComponent();
-            database = new Database();
-            dbTables = new Database_DataAccess(database);
+            database = new SQLServerDB();
+            dbTables = new SQLServerDA(database);
             exportService = new ExportService();
 
             ExportTypes = new Dictionary<string, string> 
@@ -109,8 +114,16 @@ namespace ApolloDBExporter
         // Form events
         private void Form_Main_Load(object sender, EventArgs e)
         {
-            database.SetConnectionParameters(".", "DBApollo2", "s@", "sa", false);
-            database.OpenConnection();
+            using (Form_ConnectionSettings dbConf = new Form_ConnectionSettings())
+            {
+                dbConf.ShowDialog(this);
+
+                if (dbConf.DialogResult != DialogResult.OK) return;
+
+                database.SetConnectionParameters(dbConf.ServerAddress, dbConf.DatabaseName, dbConf.Password, dbConf.UserName, dbConf.TrustedCertificate);
+                database.OpenConnection();
+                return;
+            }
         }
         private void Form_Main_Shown(object sender, EventArgs e)
         {

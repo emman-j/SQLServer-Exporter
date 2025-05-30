@@ -1,4 +1,4 @@
-﻿namespace ApolloDBExporter
+﻿namespace SQLServerExporter
 {
     partial class Form_Main
     {
