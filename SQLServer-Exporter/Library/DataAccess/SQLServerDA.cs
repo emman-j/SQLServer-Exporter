@@ -40,7 +40,6 @@ namespace SQLServerExporter.Library.DataAccess
                         datatable.Columns.Remove(column.ColumnName);
                     }
                 }
-
                 return datatable;
             }
 
@@ -173,6 +172,37 @@ namespace SQLServerExporter.Library.DataAccess
                 }
                 return null;
             }
+            private SqlCommand SqlCommand_GetAll(string tableName)
+            {
+                try 
+                {
+                    DataTable datatable = GetTableColumns(tableName);
+
+                    List<string> columnList = new List<string>();
+                    foreach (DataRow row in datatable.Rows)
+                    {
+                        if (string.IsNullOrWhiteSpace(row["Columns"].ToString())) { continue; }
+                        if (row["Columns"].ToString() == "TEXT_LOG") { continue; }
+                        columnList.Add(row["Columns"].ToString());
+                    }
+                    string columns = string.Join(",", columnList);
+
+                    // Force cast start time to date only para date lng hanapin. DateTime.Date may time padin 12am
+                    string query = $@"
+                        SELECT {columns}
+                        FROM {tableName}";
+
+                    SqlCommand command = new SqlCommand(query, database.SqlConn);
+
+                    return command;
+                }
+                catch (Exception ex)
+                {
+                    string methodName = MethodBase.GetCurrentMethod().Name;
+                    Debug.Write($">> [{methodName}] Error: " + ex.ToString());
+                }
+                return null;
+            }
             #endregion =======================================================
 
             public DataTable GetDBTableList()
@@ -204,6 +234,18 @@ namespace SQLServerExporter.Library.DataAccess
             public async Task<DataTable> GetTableByDateRangeWithColumnsAsync(string tableName, DateTime fromDate, DateTime toDate, List<string> columnsToRetain)
             {
                 SqlCommand command = SqlCommand_GetBetweenDateRange(tableName, fromDate, toDate);
+                DataTable table = await GetDataTableAsync(command);
+                return RetainColumns(table, columnsToRetain);
+            }
+        
+            public async Task<DataTable> GetTableSelectAll(string tableName)
+            {
+                SqlCommand command = SqlCommand_GetAll(tableName);
+                return await GetDataTableAsync(command);
+            }
+            public async Task<DataTable> GetTableSelectAllWithColumns(string tableName, List<string> columnsToRetain)
+            {
+                SqlCommand command = SqlCommand_GetAll(tableName);
                 DataTable table = await GetDataTableAsync(command);
                 return RetainColumns(table, columnsToRetain);
             }
