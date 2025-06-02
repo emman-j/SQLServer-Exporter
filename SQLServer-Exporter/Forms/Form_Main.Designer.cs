@@ -53,6 +53,9 @@
             this.SelectTableButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dbTableComboBox = new System.Windows.Forms.ComboBox();
+            this.ProgressPanel = new System.Windows.Forms.Panel();
+            this.DebugTextBox = new System.Windows.Forms.TextBox();
+            this.ExportProgressBar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.RowCountTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -62,9 +65,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.ExportComboBox = new System.Windows.Forms.ComboBox();
             this.ExportButton = new System.Windows.Forms.Button();
-            this.ExportProgressBar = new System.Windows.Forms.ProgressBar();
-            this.ProgressPanel = new System.Windows.Forms.Panel();
-            this.DebugTextBox = new System.Windows.Forms.TextBox();
+            this.SelectAllCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -75,9 +76,9 @@
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.ProgressPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.ProgressPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -91,7 +92,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(661, 439);
+            this.dataGridView1.Size = new System.Drawing.Size(661, 471);
             this.dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
@@ -153,7 +154,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.ProgressPanel);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1018, 503);
+            this.splitContainer1.Size = new System.Drawing.Size(1018, 535);
             this.splitContainer1.SplitterDistance = 348;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 2;
@@ -166,7 +167,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 63);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(344, 436);
+            this.tabControl1.Size = new System.Drawing.Size(344, 468);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -179,7 +180,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(336, 407);
+            this.tabPage1.Size = new System.Drawing.Size(336, 439);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Search By Date";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -188,7 +189,7 @@
             // 
             this.ViewAllCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewAllCheckBox.AutoSize = true;
-            this.ViewAllCheckBox.Location = new System.Drawing.Point(238, 358);
+            this.ViewAllCheckBox.Location = new System.Drawing.Point(238, 393);
             this.ViewAllCheckBox.Name = "ViewAllCheckBox";
             this.ViewAllCheckBox.Size = new System.Drawing.Size(73, 20);
             this.ViewAllCheckBox.TabIndex = 19;
@@ -199,7 +200,7 @@
             // SearchButton
             // 
             this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchButton.Location = new System.Drawing.Point(236, 378);
+            this.SearchButton.Location = new System.Drawing.Point(236, 413);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(75, 26);
             this.SearchButton.TabIndex = 16;
@@ -210,7 +211,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 88);
+            this.label5.Location = new System.Drawing.Point(22, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(163, 16);
             this.label5.TabIndex = 18;
@@ -220,13 +221,14 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.SelectAllCheckBox);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Location = new System.Drawing.Point(5, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 78);
+            this.groupBox1.Size = new System.Drawing.Size(326, 99);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Data From";
@@ -234,6 +236,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.dateTimePicker2.Enabled = false;
             this.dateTimePicker2.Location = new System.Drawing.Point(66, 47);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(242, 22);
@@ -262,6 +265,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Location = new System.Drawing.Point(66, 22);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(242, 22);
@@ -272,10 +276,10 @@
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(25, 107);
+            this.listBox1.Location = new System.Drawing.Point(25, 129);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(286, 244);
+            this.listBox1.Size = new System.Drawing.Size(286, 260);
             this.listBox1.TabIndex = 17;
             // 
             // tabPage2
@@ -350,6 +354,41 @@
             this.dbTableComboBox.Name = "dbTableComboBox";
             this.dbTableComboBox.Size = new System.Drawing.Size(180, 24);
             this.dbTableComboBox.TabIndex = 5;
+            // 
+            // ProgressPanel
+            // 
+            this.ProgressPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ProgressPanel.Controls.Add(this.DebugTextBox);
+            this.ProgressPanel.Controls.Add(this.ExportProgressBar);
+            this.ProgressPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ProgressPanel.Location = new System.Drawing.Point(0, 501);
+            this.ProgressPanel.Name = "ProgressPanel";
+            this.ProgressPanel.Size = new System.Drawing.Size(661, 30);
+            this.ProgressPanel.TabIndex = 2;
+            this.ProgressPanel.Visible = false;
+            // 
+            // DebugTextBox
+            // 
+            this.DebugTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DebugTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DebugTextBox.Location = new System.Drawing.Point(6, 4);
+            this.DebugTextBox.Multiline = true;
+            this.DebugTextBox.Name = "DebugTextBox";
+            this.DebugTextBox.ReadOnly = true;
+            this.DebugTextBox.Size = new System.Drawing.Size(341, 20);
+            this.DebugTextBox.TabIndex = 10;
+            this.DebugTextBox.WordWrap = false;
+            // 
+            // ExportProgressBar
+            // 
+            this.ExportProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportProgressBar.Location = new System.Drawing.Point(500, 8);
+            this.ExportProgressBar.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.ExportProgressBar.Name = "ExportProgressBar";
+            this.ExportProgressBar.Size = new System.Drawing.Size(137, 15);
+            this.ExportProgressBar.TabIndex = 18;
+            this.ExportProgressBar.Value = 50;
             // 
             // panel1
             // 
@@ -457,53 +496,32 @@
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
-            // ExportProgressBar
+            // SelectAllCheckBox
             // 
-            this.ExportProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExportProgressBar.Location = new System.Drawing.Point(500, 8);
-            this.ExportProgressBar.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.ExportProgressBar.Name = "ExportProgressBar";
-            this.ExportProgressBar.Size = new System.Drawing.Size(137, 15);
-            this.ExportProgressBar.TabIndex = 18;
-            this.ExportProgressBar.Value = 50;
-            // 
-            // ProgressPanel
-            // 
-            this.ProgressPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ProgressPanel.Controls.Add(this.DebugTextBox);
-            this.ProgressPanel.Controls.Add(this.ExportProgressBar);
-            this.ProgressPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ProgressPanel.Location = new System.Drawing.Point(0, 469);
-            this.ProgressPanel.Name = "ProgressPanel";
-            this.ProgressPanel.Size = new System.Drawing.Size(661, 30);
-            this.ProgressPanel.TabIndex = 2;
-            this.ProgressPanel.Visible = false;
-            // 
-            // DebugTextBox
-            // 
-            this.DebugTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DebugTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DebugTextBox.Location = new System.Drawing.Point(6, 4);
-            this.DebugTextBox.Multiline = true;
-            this.DebugTextBox.Name = "DebugTextBox";
-            this.DebugTextBox.ReadOnly = true;
-            this.DebugTextBox.Size = new System.Drawing.Size(341, 20);
-            this.DebugTextBox.TabIndex = 10;
-            this.DebugTextBox.WordWrap = false;
+            this.SelectAllCheckBox.AutoSize = true;
+            this.SelectAllCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.SelectAllCheckBox.Checked = true;
+            this.SelectAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.SelectAllCheckBox.Location = new System.Drawing.Point(226, 73);
+            this.SelectAllCheckBox.Name = "SelectAllCheckBox";
+            this.SelectAllCheckBox.Size = new System.Drawing.Size(82, 20);
+            this.SelectAllCheckBox.TabIndex = 9;
+            this.SelectAllCheckBox.Text = "Select All";
+            this.SelectAllCheckBox.UseVisualStyleBackColor = true;
+            this.SelectAllCheckBox.CheckedChanged += new System.EventHandler(this.SelectAllCheckBox_CheckedChanged);
             // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 527);
+            this.ClientSize = new System.Drawing.Size(1018, 559);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Main";
-            this.Text = "Sample Application";
+            this.Text = "SQL Server Exporter";
             this.Load += new System.EventHandler(this.Form_Main_Load);
             this.Shown += new System.EventHandler(this.Form_Main_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -520,12 +538,12 @@
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.ProgressPanel.ResumeLayout(false);
+            this.ProgressPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.ProgressPanel.ResumeLayout(false);
-            this.ProgressPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,6 +588,7 @@
         private System.Windows.Forms.ProgressBar ExportProgressBar;
         private System.Windows.Forms.Panel ProgressPanel;
         private System.Windows.Forms.TextBox DebugTextBox;
+        private System.Windows.Forms.CheckBox SelectAllCheckBox;
     }
 }
 

@@ -163,12 +163,18 @@ namespace SQLServerExporter
                     selectedColumns.Add(item.ToString());
                 }
 
-                dataTable =  await dbTables.GetTableByDateRangeWithColumnsAsync(dbTableComboBox.Text, dateTimePicker1.Value, dateTimePicker2.Value, selectedColumns);
+                dataTable = !SelectAllCheckBox.Checked ? await dbTables.GetTableByDateRangeWithColumnsAsync(dbTableComboBox.Text, dateTimePicker1.Value, dateTimePicker2.Value, selectedColumns) :
+                    await dbTables.GetTableSelectAllWithColumns(dbTableComboBox.Text, selectedColumns);
                 BindDataGridView(await dbTables.GetTableByDateRangeWithColumnsAsync(dbTableComboBox.Text, dateTimePicker1.Value, dateTimePicker2.Value, selectedColumns), dataGridView1);
                 RowCountTextBox.Text = dataTable.Rows.Count.ToString();
                 return;
             }
-            dataTable = await dbTables.GetTableByDateRangeAsync(dbTableComboBox.Text, dateTimePicker1.Value, dateTimePicker2.Value);
+
+            dataTable = !SelectAllCheckBox.Checked? await dbTables.GetTableByDateRangeAsync(dbTableComboBox.Text, dateTimePicker1.Value, dateTimePicker2.Value) :
+                    await dbTables.GetTableSelectAll(dbTableComboBox.Text);
+
+            if (dataTable == null) return;
+
             RowCountTextBox.Text = dataTable.Rows.Count.ToString();
             BindDataGridView(dataTable, dataGridView1);
         }
@@ -214,6 +220,11 @@ namespace SQLServerExporter
         private void ViewAllCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             listBox1.Enabled = !ViewAllCheckBox.Checked;
+        }
+
+        private void SelectAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker1.Enabled = dateTimePicker2.Enabled = !SelectAllCheckBox.Checked;
         }
     }
 }
