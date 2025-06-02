@@ -1,6 +1,7 @@
 # SQLServer-Exporter
 
-**SQLServer-Exporter** is a C# application designed to export data from Microsoft SQL Server databases to Excel (`.xlsx`) and CSV (`.csv`) formats. It features a user-friendly interface for selecting tables, filtering by date ranges, customizing columns, and specifying export paths.
+**SQLServer-Exporter** is a C# application designed to export data from Microsoft SQL Server databases to Excel (`.xlsx`), CSV (`.csv`) and Text (`.txt`) formats.
+It features a user-friendly interface for selecting tables, filtering by date ranges, customizing columns, and specifying export paths.
 
 ![main](https://raw.githubusercontent.com/emman-j/SQLServer-Exporter/refs/heads/main/Images/main.png)
 ![export1](https://raw.githubusercontent.com/emman-j/SQLServer-Exporter/refs/heads/main/Images/exportProgress.png)
@@ -10,7 +11,7 @@
 - **Data Export to Excel and CSV**  
   Export full or filtered table data directly to Excel or CSV.
 
-- **Date Range Filtering**  
+- **Date Range Filtering (WIP)**  
   Select a date range to limit the data retrieved based on a table’s datetime column.
 
 - **Custom Column Selection**  
